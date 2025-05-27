@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 import { ProductsService } from './products.service'
 import { CreateProductDto } from './dto/create-product-dto'
+import { Product } from './product.entity'
 
 @Controller('products')
 export class ProductsController {
@@ -17,8 +18,7 @@ export class ProductsController {
   }
 
   @Post('createProduct')
-  createProduct(@Body() input: CreateProductDto) {
-    if (this.productsService.checkForEmptyValue(input)) return 'Failed!'
-    return `Created a new product called ${input.name}!`
+  async createProduct(@Body() createProductDto: CreateProductDto): Promise<Product> {
+    return this.productsService.create(createProductDto)
   }
 }
