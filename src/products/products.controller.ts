@@ -8,16 +8,16 @@ export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
   @Get()
-  findAll() {
-    return 'This action returns all products'
+  async findAll() {
+    return this.productsService.find()
   }
 
   @Get(':id')
-  findProductById(@Param() id: string) {
-    return `This product has the id of ${id}`
+  async findProductById(@Param('id') id: string) {
+    return this.productsService.findOne(id)
   }
 
-  @Post('createProduct')
+  @Post('create-product')
   async createProduct(@Body() createProductDto: CreateProductDto): Promise<Product> {
     return this.productsService.create(createProductDto)
   }
