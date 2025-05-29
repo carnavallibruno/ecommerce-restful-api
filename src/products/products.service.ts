@@ -29,4 +29,14 @@ export class ProductsService {
     const product = this.productRepository.create(createProductDto)
     return await this.productRepository.save(product)
   }
+
+  async update(id: string, data: any) {
+    const productToUpdate = await this.productRepository.findOne({ where: { id } })
+
+    if (!productToUpdate) {
+      throw new NotFoundException(`Product with ID ${id} not found`)
+    }
+
+    return await this.productRepository.update(id, data)
+  }
 }
