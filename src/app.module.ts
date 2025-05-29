@@ -5,6 +5,8 @@ import { getDatabaseConfig } from './config/database.config'
 import { ProductsModule } from './products/products.module'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
+import { UsersController } from './users/users.controller';
+import { UsersService } from './users/users.service';
 
 @Module({
   imports: [
@@ -18,7 +20,7 @@ import { AppService } from './app.service'
     }),
     ProductsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService]
+  controllers: [AppController, UsersController],
+  providers: [AppService, UsersService]
 })
 export class AppModule {}
