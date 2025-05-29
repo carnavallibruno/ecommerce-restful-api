@@ -39,4 +39,14 @@ export class ProductsService {
 
     return await this.productRepository.update(id, data)
   }
+
+  async delete(id: string) {
+    const productToDelete = await this.productRepository.findOne({ where: { id } })
+
+    if (!productToDelete) {
+      throw new NotFoundException(`Product with ID ${id} not found`)
+    }
+
+    return await this.productRepository.delete(id)
+  }
 }
